@@ -4,7 +4,7 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-import { initializeLightbox } from './render-fucnctions';
+import { initializeLightbox } from './render-functions';
 
 const API_KEY = (axios.defaults.API_KEY = '49359478-baf2a77463771851b04b26e30');
 const BASE_URL = (axios.defaults.baseURL = 'https://pixabay.com/api/');
