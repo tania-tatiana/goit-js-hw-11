@@ -1,25 +1,25 @@
 import axios from 'axios';
 import { fetchPixabay } from './js/pixabay-api';
-// const input = document.querySelector('.form-input');
-// const button = document.querySelector('.form-button');
+
 const pixabayRefs = {
-  form: document.getElementById('search-form'),
-  searchQueryInput: document.getElementById('search-query'),
-  imagesContainer: document.getElementById('images-container'),
+  form: document.querySelector('.form'),
+  searchQueryInput: document.querySelector('.form-input'),
+  imagesContainer: document.querySelector('.gallery'),
   button: document.querySelector('.form-button'),
 };
 
-pixabayRefs.button.addEventListener('submit', event => {
+pixabayRefs.form.addEventListener('submit', event => {
   event.preventDefault();
   const searchQuery = pixabayRefs.searchQueryInput.value.trim();
   if (!searchQuery) {
     iziToast.error({
       messageColor: '#FAFAFB',
-      icon: './img/bi_x-octagon.svg',
+      iconUrl: './img/bi_x-octagon.svg',
+      iconColor: 'white',
       message:
         'Sorry, there are no images matching your search query. Please, try again!',
       position: 'topRight',
-      backgroundColor: '#ffbebe',
+      backgroundColor: '#ef4040',
       color: '#fafafb',
     });
     return;
