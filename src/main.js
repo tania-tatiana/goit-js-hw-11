@@ -1,5 +1,12 @@
 import axios from 'axios';
+// Описаний у документації
+import iziToast from 'izitoast';
+// Додатковий імпорт стилів
+import 'izitoast/dist/css/iziToast.min.css';
+
 import { fetchPixabay } from './js/pixabay-api';
+
+import { clearGallery } from './js/pixabay-api';
 
 const pixabayRefs = {
   form: document.querySelector('.form'),
@@ -24,5 +31,6 @@ pixabayRefs.form.addEventListener('submit', event => {
     });
     return;
   }
+  clearGallery();
   fetchPixabay(searchQuery);
 });

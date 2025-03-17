@@ -100,3 +100,7 @@ function populateGallery(pixabays = []) {
   });
   initializeLightbox();
 }
+export function clearGallery() {
+  const imagesContainer = document.querySelector('.gallery');
+  imagesContainer.innerHTML = '';
+}
