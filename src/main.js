@@ -5,14 +5,15 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import { fetchPixabay } from './js/pixabay-api';
-
-import { clearGallery } from './js/pixabay-api';
+import { populateGallery } from './js/render-functions';
+import { clearGallery } from './js/render-functions';
 
 const pixabayRefs = {
   form: document.querySelector('.form'),
   searchQueryInput: document.querySelector('.form-input'),
   imagesContainer: document.querySelector('.gallery'),
   button: document.querySelector('.form-button'),
+  loader: document.querySelector('.loader'),
 };
 
 pixabayRefs.form.addEventListener('submit', event => {
@@ -32,5 +33,27 @@ pixabayRefs.form.addEventListener('submit', event => {
     return;
   }
   clearGallery();
-  fetchPixabay(searchQuery);
+  fetchPixabay(searchQuery)
+    .then(response => {
+      if (response.hits.length === 0) {
+        // Якщо зображень немає, генеруємо помилку
+        throw new Error('No images found for this query');
+      }
+      populateGallery(response.hits); // Викликаємо функцію рендеру з зображеннями
+    })
+    .catch(error => {
+      iziToast.error({
+        messageColor: '#FAFAFB',
+        iconUrl: './img/bi_x-octagon.svg',
+        iconColor: 'white',
+        message:
+          'Sorry, there are no images matching</br> your search query. Please, try again!',
+        position: 'topRight',
+        backgroundColor: '#ef4040',
+        color: '#fafafb',
+      });
+    })
+    .finally(() => {
+      document.querySelector('.loader').style.display = 'none';
+    });
 });
