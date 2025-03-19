@@ -3,10 +3,16 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+// Описаний у документації
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchPixabay } from './js/pixabay-api';
 import { populateGallery } from './js/render-functions';
 import { clearGallery } from './js/render-functions';
+
+const lightbox = new SimpleLightbox('.gallery a');
 
 const pixabayRefs = {
   form: document.querySelector('.form'),
@@ -24,8 +30,7 @@ pixabayRefs.form.addEventListener('submit', event => {
       messageColor: '#FAFAFB',
       iconUrl: './img/bi_x-octagon.svg',
       iconColor: 'white',
-      message:
-        'Sorry, there are no images matching your search query. Please, try again!',
+      message: 'Please enter a search word!',
       position: 'topRight',
       backgroundColor: '#ef4040',
       color: '#fafafb',
@@ -40,6 +45,7 @@ pixabayRefs.form.addEventListener('submit', event => {
         throw new Error('No images found for this query');
       }
       populateGallery(response.hits); // Викликаємо функцію рендеру з зображеннями
+      lightbox.refresh();
     })
     .catch(error => {
       iziToast.error({

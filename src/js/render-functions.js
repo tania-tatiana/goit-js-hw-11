@@ -1,12 +1,9 @@
-// Описаний у документації
-import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
-import 'simplelightbox/dist/simple-lightbox.min.css';
+// // Описаний у документації
+// import SimpleLightbox from 'simplelightbox';
+// // Додатковий імпорт стилів
+// import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export function initializeLightbox() {
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
-}
+// const lightbox = new SimpleLightbox('.gallery a');
 
 export function populateGallery(pixabays = []) {
   const imagesContainer = document.querySelector('.gallery');
@@ -59,7 +56,7 @@ export function populateGallery(pixabays = []) {
     // Додаємо картку в контейнер
     imagesContainer.appendChild(cardContainer);
   });
-  initializeLightbox();
+  // lightbox.refresh();
 }
 export function clearGallery() {
   const imagesContainer = document.querySelector('.gallery');

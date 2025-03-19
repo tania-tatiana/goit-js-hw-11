@@ -4,9 +4,6 @@ const API_KEY = '49359478-baf2a77463771851b04b26e30';
 const BASE_URL = 'https://pixabay.com/api/';
 
 export function fetchPixabay(searchQuery) {
-  const loader = document.querySelector('.loader');
-  loader.style.display = 'inline-block';
-
   return axios
     .get(BASE_URL, {
       params: {
@@ -23,8 +20,5 @@ export function fetchPixabay(searchQuery) {
     .catch(error => {
       console.error('Error fetching data:', error);
       throw error;
-    })
-    .finally(() => {
-      document.querySelector('.loader').style.display = 'none';
     });
 }
