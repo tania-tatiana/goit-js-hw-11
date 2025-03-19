@@ -11,8 +11,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchPixabay } from './js/pixabay-api';
 import { populateGallery } from './js/render-functions';
 import { clearGallery } from './js/render-functions';
-
-const lightbox = new SimpleLightbox('.gallery a');
+import { initializeLightbox } from './js/render-functions';
 
 const pixabayRefs = {
   form: document.querySelector('.form'),
@@ -38,6 +37,9 @@ pixabayRefs.form.addEventListener('submit', event => {
     return;
   }
   clearGallery();
+
+  pixabayRefs.loader.style.display = 'inline-block';
+
   fetchPixabay(searchQuery)
     .then(response => {
       if (response.hits.length === 0) {
@@ -45,7 +47,7 @@ pixabayRefs.form.addEventListener('submit', event => {
         throw new Error('No images found for this query');
       }
       populateGallery(response.hits); // Викликаємо функцію рендеру з зображеннями
-      lightbox.refresh();
+      initializeLightbox();
     })
     .catch(error => {
       iziToast.error({
@@ -60,6 +62,6 @@ pixabayRefs.form.addEventListener('submit', event => {
       });
     })
     .finally(() => {
-      document.querySelector('.loader').style.display = 'none';
+      pixabayRefs.loader.style.display = 'none';
     });
 });
