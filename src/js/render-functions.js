@@ -5,11 +5,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 let lightbox = null;
 
-export function initializeLightbox() {
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
-}
-
 export function populateGallery(pixabays = []) {
   const imagesContainer = document.querySelector('.gallery');
 

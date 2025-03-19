@@ -47,7 +47,6 @@ pixabayRefs.form.addEventListener('submit', event => {
         throw new Error('No images found for this query');
       }
       populateGallery(response.hits); // Викликаємо функцію рендеру з зображеннями
-      initializeLightbox();
     })
     .catch(error => {
       iziToast.error({
